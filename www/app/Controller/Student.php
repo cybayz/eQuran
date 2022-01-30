@@ -35,11 +35,13 @@ class Student extends Core\Controller {
         Utility\Auth::checkAuthenticated();
 
         $courses = Model\Course::getCourseList();
+        $teachers = Model\Teacher::getTeacherList();
 
         $this->View->render("student/addstudent", [
             "title"         =>  "Add Student",
             "show_header"   =>  true,
-            "course_data"   =>  $courses->data()
+            "course_data"   =>  $courses->data(),
+            "teachers_data" =>  $teachers->data()
         ]);
     }
 

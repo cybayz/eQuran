@@ -16,7 +16,8 @@ use App\Utility\Flash;
     <link href="<?= $this->makeURL("css/dashboard.css"); ?>" rel="stylesheet" type="text/css" />
     <link href="<?= $this->makeURL("js/dashboard.js"); ?>" type="text/javascript" />
     <link rel="preconnect" href="https://fonts.gstatic.com">
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+    <script src="<?= $this->makeURL("js/jquery.min.js"); ?>" type="text/javascript"></script>
+    <!-- <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script> -->
     <!-- <link rel="stylesheet" href="<?= $this->makeURL("css/bootstrap.min.css"); ?>"> -->
     <link rel="stylesheet" href="<?= $this->makeURL("vendors/bootstrap/dist/css/bootstrap.min.css"); ?>">
     <link rel="stylesheet" href="<?= $this->makeURL("vendors/font-awesome/css/font-awesome.min.css"); ?>">
@@ -90,6 +91,13 @@ use App\Utility\Flash;
                         <ul class="sub-menu children dropdown-menu">
                             <li><i class="menu-icon fa fa-th"></i><a href="forms-basic.html">View Marks</a></li>
                             <li><i class="menu-icon fa fa-th"></i><a href="forms-advanced.html">Add Marks</a></li>
+                        </ul>
+                    </li>
+                    <li class="menu-item-has-children dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-th"></i>Teachers</a>
+                        <ul class="sub-menu children dropdown-menu">
+                            <li><i class="menu-icon fa fa-th"></i><a href="<?= $this->makeURL("teacher/teacherlist"); ?>">View Teachers</a></li>
+                            <li><i class="menu-icon fa fa-th"></i><a href="<?= $this->makeURL("teacher/addteacher"); ?>">Add Teacher</a></li>
                         </ul>
                     </li>
 

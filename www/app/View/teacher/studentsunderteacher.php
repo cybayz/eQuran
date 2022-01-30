@@ -19,14 +19,12 @@
                                 </tr>
                             </thead>
                             <tbody>
-                            <?php foreach($this->student_data as $key=>$row){
-                                $course_id_of_student=($row->courseid)-1;
-                                $batch_id_of_student=($row->batchid)-1;?>
+                            <?php foreach($this->student_data as $key=>$row){?>
                                 <tr>
                                     <td><?=$row->id;?></td>
                                     <td><a href="<?=$this->makeURL("student/details/").$row->id; ?>"><?=$row->firstname;?> <?=$row->lastname;?></a></td>
-                                    <td><?=$this->course_data[$course_id_of_student]->coursename;?></td>
-                                    <td><?=$this->batch_data[$batch_id_of_student]->batchname;?></td>
+                                    <td><?=$row->coursename;?></td>
+                                    <td><?=$row->batchname;?></td>
                                     <td><?=$row->mobile;?></td>
                                     <td><button id="<?=$row->id;?>" type="button" class="btn btn-danger btn-sm deletebtn" data-toggle="modal" data-target="#deleteModal" onclick="prefillid(this)">Delete</button></td>
                                 </tr><?php                                 

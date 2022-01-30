@@ -18,8 +18,20 @@
                         <div class="col-12 col-md-9"><input type="text" id="lastname" name="lastname" placeholder="Last Name" class="form-control"></div>
                     </div>
                     <div class="row form-group">
-                        <div class="col col-md-3"><label for="text-input" class=" form-control-label">Mobile Number</label></div>
+                        <div class="col col-md-3"><label for="text-input" class=" form-control-label">Mobile No.</label></div>
                         <div class="col-12 col-md-9"><input type="text" id="mobile" name="mobile" placeholder="Mobile Number" class="form-control"></div>
+                    </div>
+                    <div class="row form-group">
+                        <div class="col col-md-3"><label for="select" class=" form-control-label">Age</label></div>
+                        <div class="col-12 col-md-9">
+                            <select name="age" id="age" class="form-control">
+                                <option value="0">Please select</option>
+                                    <?php for($age=1;$age<100;$age++){?>
+                                        <option value="<?=$age;?>"><?=$age." Years";?></option>
+                                    <?php                                 
+                                }?>
+                            </select>
+                        </div>
                     </div>
                     <div class="row form-group">
                         <div class="col col-md-3"><label for="text-input" class=" form-control-label">Address</label></div>
@@ -49,6 +61,18 @@
                                 }?>
                             </select>
                         </div>
+                    </div>
+                    <div class="row form-group">
+                        <div class="col col-md-3"><label for="select" class=" form-control-label">Teacher</label></div>
+                        <div class="col-12 col-md-9">
+                            <select name="teacher" id="teacher" class="form-control">
+                                <option value="0">Please select</option>
+                                    <?php foreach($this->teachers_data as $row){?>
+                                        <option value="<?=$row->id;?>"><?=$row->name;?></option>
+                                    <?php                                 
+                                }?>
+                            </select>
+                        </div>
                     </div>                   
                     <div class="row form-group">
                         <button type="submit" class="btn btn-primary btn-sm">
@@ -65,18 +89,18 @@
 </div>
 <script>
     $("#course").change(function () {                            
-            var course_id = this.value;
-            $.ajax({
-                url: "getbatchbycourseid",
-                type: "POST",
-                data: {
-                    course_id: course_id
-                },
-                cache: false,
-                success: function(result){
-                    $("#batch").html(result);
-                }
-            });
+        var course_id = this.value;
+        $.ajax({
+            url: "getbatchbycourseid",
+            type: "POST",
+            data: {
+                course_id: course_id
+            },
+            cache: false,
+            success: function(result){
+                $("#batch").html(result);
+            }
+        });
         
         
     });  

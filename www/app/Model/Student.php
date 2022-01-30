@@ -46,12 +46,14 @@ class Student extends Core\Model {
             $studentObj = new Student();
             $studentID = $studentObj->addStudent([
                 "firstname" => Utility\Input::post("firstname"),
-                "lastname" => Utility\Input::post("lastname"),
-                "mobile" => Utility\Input::post("mobile"),
-                "address" => Utility\Input::post("address"),
-                "email" => Utility\Input::post("email"),
-                "courseid" => Utility\Input::post("course"),
-                "batchid" => Utility\Input::post("batch")
+                "lastname"  => Utility\Input::post("lastname"),
+                "mobile"    => Utility\Input::post("mobile"),
+                "address"   => Utility\Input::post("address"),
+                "email"     => Utility\Input::post("email"),
+                "courseid"  => Utility\Input::post("course"),
+                "batchid"   => Utility\Input::post("batch"),
+                "age"       => Utility\Input::post("age"),
+                "teacherid" => Utility\Input::post("teacher")
             ]);
             //Utility\Flash::success(Utility\Text::get("REGISTER_USER_CREATED"));
             Utility\Redirect::to(APP_URL . "student/studentlist");

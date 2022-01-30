@@ -4,29 +4,25 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">
-                        <strong class="card-title">Student List</strong>
+                        <strong class="card-title">Course List</strong>
                     </div>
                     <div class="card-body">
                         <table id="bootstrap-data-table-export" class="table table-striped table-bordered">
                             <thead>
                                 <tr>
-                                    <th>Id</th>
-                                    <th>Student Name</th>
-                                    <th>Course Name</th>
-                                    <th>Batch Name</th>
-                                    <th>Mobile Number</th>
+                                    <th>Teacher Id</th>
+                                    <th>Teacher Name</th>
+                                    <th>Qualification</th>
+                                    <th>Mobile No</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
-                            <?php foreach($this->student_data as $key=>$row){
-                                $course_id_of_student=($row->courseid)-1;
-                                $batch_id_of_student=($row->batchid)-1;?>
+                            <?php foreach($this->data as $row){?>
                                 <tr>
                                     <td><?=$row->id;?></td>
-                                    <td><a href="<?=$this->makeURL("student/details/").$row->id; ?>"><?=$row->firstname;?> <?=$row->lastname;?></a></td>
-                                    <td><?=$this->course_data[$course_id_of_student]->coursename;?></td>
-                                    <td><?=$this->batch_data[$batch_id_of_student]->batchname;?></td>
+                                    <td><a href="<?=$this->makeURL("teacher/studentsunderteacher/").$row->id; ?>"><?=$row->name;?></a></td>
+                                    <td><?=$row->qualification;?></td>
                                     <td><?=$row->mobile;?></td>
                                     <td><button id="<?=$row->id;?>" type="button" class="btn btn-danger btn-sm deletebtn" data-toggle="modal" data-target="#deleteModal" onclick="prefillid(this)">Delete</button></td>
                                 </tr><?php                                 
