@@ -14,6 +14,7 @@
                                     <th>Student Name</th>
                                     <th>Course Name</th>
                                     <th>Batch Name</th>
+                                    <th>Juzz</th>
                                     <th>Mobile Number</th>
                                     <th>Action</th>
                                 </tr>
@@ -25,6 +26,7 @@
                                     <td><a href="<?=$this->makeURL("student/details/").$row->id; ?>"><?=$row->firstname;?> <?=$row->lastname;?></a></td>
                                     <td><?=$row->coursename;?></td>
                                     <td><?=$row->batchname;?></td>
+                                    <td><?=$row->juzz;?></td>
                                     <td><?=$row->mobile;?></td>
                                     <td><button id="<?=$row->id;?>" type="button" class="btn btn-danger btn-sm deletebtn" data-toggle="modal" data-target="#deleteModal" onclick="prefillid(this)">Delete</button></td>
                                 </tr><?php                                 
