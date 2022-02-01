@@ -27,10 +27,13 @@ class Mark extends Core\Controller {
         // Check that the user is authenticated.
         Utility\Auth::checkAuthenticated();
 
-        $studentdata = Model\Student::getStudentList();
-        $this->View->render("course/courselist", [
-            "title" => "Course List",
+        $markdata = Model\Mark::getMarkList();
+        $studentdata = Model\Mark::getStudentMarkList();
+
+        $this->View->render("mark/marklist", [
+            "title" => "Mark List",
             "studentdata" => $studentdata->data(),
+            "markdata"    => $markdata->data(),
             "show_header" => true
         ]);
     }
@@ -40,20 +43,43 @@ class Mark extends Core\Controller {
         // Check that the user is authenticated.
         Utility\Auth::checkAuthenticated();
 
+        $courses = Model\Course::getCourseList();
+        $teachers = Model\Teacher::getTeacherList();
+        $batch_data = Model\Batch::getBatchList();
+
+        $studentdata = Model\Mark::getStudentList();
+
         $this->View->render("mark/addmark", [
             "title"         =>  "Add Mark",
-            "show_header"   =>  true
+            "show_header"   =>  true,
+            "course_data"   =>  $courses->data(),
+            "teachers_data" =>  $teachers->data(),
+            "student_data"  =>  $studentdata->data(),
+            "batch_data"    =>  $batch_data->data()
         ]);
     }
 
-    public function create() {
+    public function createmark() {
 
         // Check that the user is authenticated.
         Utility\Auth::checkAuthenticated();
 
-        if (Model\Course::add()) {
-            Utility\Redirect::to(APP_URL . "course/courselist");
+        if (Model\Mark::add()) {
+            Utility\Redirect::to(APP_URL . "mark/addmarkssss");
         }
+    }
+
+    public function getbatchbycourseid(){
+        $courses = Model\Batch::getBatchListByCourse($_POST['course_id']);
+        $batches='<option value="0">Select Batch</option>';
+        foreach ($courses->data() as $batch){
+            $batches = $batches." <option value = '".$batch->id."'>".$batch->batchname."</option>";
+        }
+        echo $batches;
+    }
+
+    public function getstudentsmark(){
+        $mark = Model\Mark::getstudentsmarkbyid($_POST['id']);
     }
     
 }

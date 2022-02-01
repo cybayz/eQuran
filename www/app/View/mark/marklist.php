@@ -4,27 +4,39 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">
-                        <strong class="card-title">Course List</strong>
+                        <strong class="card-title">Mark List</strong>
                     </div>
                     <div class="card-body">
                         <table id="bootstrap-data-table-export" class="table table-striped table-bordered">
                             <thead>
                                 <tr>
-                                    <th>Course Id</th>
-                                    <th>Course Name</th>
-                                    <th>Description</th>
-                                    <th>Duration</th>
-                                    <th>Action</th>
+                                    <th>Id</th>
+                                    <th>Name</th>
+                                    <th>Mobile</th>
+                                    <?php
+                                        for($i=1;$i<31;$i++){?>
+                                            <th>Juzz <?=$i; ?></th> <?php
+                                        }
+                                    ?>
                                 </tr>
                             </thead>
                             <tbody>
-                            <?php foreach($this->data as $row){?>
+                            <?php foreach($this->studentdata as $row){?>
                                 <tr>
                                     <td><?=$row->id;?></td>
-                                    <td><?=$row->coursename;?></td>
-                                    <td><?=$row->coursedescription;?></td>
-                                    <td><?=$row->courseduration;?></td>
-                                    <td><button id="<?=$row->id;?>" type="button" class="btn btn-danger btn-sm deletebtn" data-toggle="modal" data-target="#deleteModal" onclick="prefillid(this)">Delete</button></td>
+                                    <td><?=$row->firstname;?></td>
+                                    <td><?=$row->mobile;?></td>
+                                    <?php
+                                        for($i=1;$i<31;$i++){
+                                            $markofrow = 0;
+                                            foreach($this->markdata as $mark){
+                                                if(($mark->juzz==$i)&&($mark->studentid==$row->id)){
+                                                    $markofrow=$mark->mark;
+                                                }
+                                            }
+                                        ?><td><?=$markofrow; ?></td> <?php 
+                                        }
+                                    ?>
                                 </tr><?php                                 
                             }?>
                             </tbody>
