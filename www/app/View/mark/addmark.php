@@ -114,8 +114,10 @@
                         <div class="col-12 col-md-3">
                             <select name="juzz" id="juzz" class="form-control">
                                 <option value="0">Select Juzz</option>
-                                <?php for($i=1;$i<10;$i++){
-                                    echo ("<option value=".$i.">Juzz ".$i."</option>");
+                                <option value="1">1/4 Juzz</option>
+                                <option value="2">1/2 Juzz</option>
+                                <?php for($i=3;$i<33;$i++){
+                                    echo ("<option value=".($i-2).">Juzz ".$i."</option>");
                                 }?>
                             </select>
                         </div>

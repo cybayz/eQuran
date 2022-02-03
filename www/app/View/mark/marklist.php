@@ -6,16 +6,18 @@
                     <div class="card-header">
                         <strong class="card-title">Mark List</strong>
                     </div>
-                    <div class="card-body">
+                    <div class="card-body" style="overflow-x: scroll; width:1010px;">
                         <table id="bootstrap-data-table-export" class="table table-striped table-bordered">
                             <thead>
                                 <tr>
                                     <th>Id</th>
                                     <th>Name</th>
                                     <th>Mobile</th>
+                                    <th>1/4 Juzz</th>
+                                    <th>1/2 Juzz</th>
                                     <?php
-                                        for($i=1;$i<31;$i++){?>
-                                            <th>Juzz <?=$i; ?></th> <?php
+                                        for($i=3;$i<33;$i++){?>
+                                            <th>Juzz <?=($i-2); ?></th> <?php
                                         }
                                     ?>
                                 </tr>
@@ -27,7 +29,7 @@
                                     <td><?=$row->firstname;?></td>
                                     <td><?=$row->mobile;?></td>
                                     <?php
-                                        for($i=1;$i<31;$i++){
+                                        for($i=1;$i<33;$i++){
                                             $markofrow = 0;
                                             foreach($this->markdata as $mark){
                                                 if(($mark->juzz==$i)&&($mark->studentid==$row->id)){
@@ -77,4 +79,12 @@
     function prefillid(element){
         $(deletionId).val(element.id);
     };
+    $(document).ready(function () {
+      $('#bootstrap-data-table-export').DataTable({
+  
+        // Enable the horizontal scrolling
+        // of data in DataTable
+        scrollX: true
+      });
+    }); 
 </script>
