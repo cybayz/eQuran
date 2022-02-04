@@ -77,7 +77,7 @@ class Mark extends Core\Model {
                 LEFT JOIN teacher t ON t.id=u.teacherid 
                 LEFT JOIN mark m ON u.id=m.studentid AND m.juzz=(u.juzz-1) 
                 WHERE isadmin = 0 
-                GROUP BY u.id";
+                 ";
 
         $params = [];
 
@@ -90,6 +90,8 @@ class Mark extends Core\Model {
         if(isset($filters['teacher'])&& $filters['teacher']>0){
             $sql = $sql." AND t.id = ".$filters['teacher']." ";
         }
+
+        $sql =$sql." GROUP BY u.id ";
 
         return($this->getfromdbusingselect($sql,$params));
     }

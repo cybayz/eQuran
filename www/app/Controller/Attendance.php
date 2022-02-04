@@ -12,7 +12,7 @@ use App\Utility;
  * @author Sadmi Siraj <cybayz@gmail.com>
  * @since 1.0
  */
-class Mark extends Core\Controller {
+class Attendance extends Core\Controller {
 
     /**
      * Index: Renders the index view. NOTE: This controller can only be accessed
@@ -38,34 +38,44 @@ class Mark extends Core\Controller {
         ]);
     }
 
-    public function addmark() {
+    public function addattendance() {
 
         // Check that the user is authenticated.
         Utility\Auth::checkAuthenticated();
 
+        $this->View->render("attendance/addattendance", [
+            "title"         =>  "Add Attendance",
+            "show_header"   =>  true
+        ]);
+    }
+    
+    public function monthlybatchattendance() {
+
+        // Check that the user is authenticated.
+        Utility\Auth::checkAuthenticated();
         $courses = Model\Course::getCourseList();
-        $teachers = Model\Teacher::getTeacherList();
         $batch_data = Model\Batch::getBatchList();
 
-        $studentdata = Model\Mark::getStudentList();
+        $studentdata = Model\Attendance::getStudentList();
+        $attendancedata = Model\Attendance::getAttendanceList();
 
-        $this->View->render("mark/addmark", [
-            "title"         =>  "Add Mark",
-            "show_header"   =>  true,
-            "course_data"   =>  $courses->data(),
-            "teachers_data" =>  $teachers->data(),
-            "student_data"  =>  $studentdata->data(),
-            "batch_data"    =>  $batch_data->data()
+        $this->View->render("attendance/monthlybatchattendance", [
+            "title"             =>  "Monthy Batch Attendance",
+            "show_header"       =>  true,
+            "course_data"       =>  $courses->data(),
+            "batch_data"        =>  $batch_data->data(),
+            "student_data"      =>  $studentdata->data(),
+            "attendance_data"   =>  $attendancedata->data()
         ]);
     }
 
-    public function createmark() {
+    public function create() {
 
         // Check that the user is authenticated.
         Utility\Auth::checkAuthenticated();
 
-        if (Model\Mark::add()) {
-            Utility\Redirect::to(APP_URL . "mark/addmark");
+        if (Model\Attendance::add()) {
+            Utility\Redirect::to(APP_URL . "attendance/addmarkssss");
         }
     }
 
@@ -78,8 +88,4 @@ class Mark extends Core\Controller {
         echo $batches;
     }
 
-    public function getstudentsmark(){
-        $mark = Model\Mark::getstudentsmarkbyid($_POST['id']);
-    }
-    
 }

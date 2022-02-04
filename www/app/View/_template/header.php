@@ -67,8 +67,8 @@ use App\Utility\Flash;
                     <li class="menu-item-has-children dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-table"></i>Attedance</a>
                         <ul class="sub-menu children dropdown-menu">
-                            <li><i class="fa fa-table"></i><a href="tables-basic.html">Add daily Attedance</a></li>
-                            <li><i class="fa fa-table"></i><a href="tables-data.html">View Batch Attedance</a></li>
+                            <li><i class="fa fa-table"></i><a href="<?= $this->makeURL("attendance/addattendance"); ?>">Add daily Attedance</a></li>
+                            <li><i class="fa fa-table"></i><a href="<?= $this->makeURL("attendance/monthlybatchattendance"); ?>">View Monthly Batch Attedance</a></li>
                             <li><i class="fa fa-table"></i><a href="tables-data.html">View Student's Attedance</a></li>
                         </ul>
                     </li>
