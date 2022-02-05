@@ -67,7 +67,7 @@ class Batch extends Core\Controller {
         // Check that the user is authenticated.
         Utility\Auth::checkAuthenticated();
 
-        if (Model\Course::deletecourse()) {
+        if (Model\Batch::deletebatch()) {
             Utility\Redirect::to(APP_URL . "course/courselist");
         }
     }

@@ -91,18 +91,18 @@ class Batch extends Core\Model {
         return($this->getfromdb("batch",$where));
     }
 
-    public static function deletecourse() {
+    public static function deletebatch() {
 
         try {
-            $courseObj = new Course();
-            $courseID = $courseObj->deletefromdb([
+            $batchObj = new Batch();
+            $batchID = $batchObj->deletefromdb([
                 0 => "id",
                 1 => "=",
                 2 => Utility\Input::post("deletionId")
             ]);
             //Utility\Flash::success(Utility\Text::get("COURSE_DELETED"));
-            Utility\Redirect::to(APP_URL . "course/courselist");
-            return $courseID;
+            Utility\Redirect::to(APP_URL . "batch/batchlist");
+            return $batchID;
         } catch (Exception $ex) {
             Utility\Flash::danger($ex->getMessage());
             return false;
@@ -110,7 +110,7 @@ class Batch extends Core\Model {
     }
 
     public function deletefromdb($where){
-        if (!$userID = $this->delete("course", $where)) {
+        if (!$userID = $this->delete("batch", $where)) {
             throw new Exception(Utility\Text::get("USER_CREATE_EXCEPTION"));
         }
     

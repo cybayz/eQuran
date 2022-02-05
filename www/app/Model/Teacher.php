@@ -85,5 +85,29 @@ class Teacher extends Core\Model {
         return($this->getfromdbusingselect($sql,$params));
     }
 
+    public static function deleteteacher() {
+
+        try {
+            $teacherObj = new Teacher();
+            $teacherID = $teacherObj->deletefromdb([
+                0 => "id",
+                1 => "=",
+                2 => Utility\Input::post("deletionId")
+            ]);
+            //Utility\Flash::success(Utility\Text::get("COURSE_DELETED"));
+            Utility\Redirect::to(APP_URL . "teacher/teacherlist");
+            return $teacherID;
+        } catch (Exception $ex) {
+            Utility\Flash::danger($ex->getMessage());
+            return false;
+        }
+    }
+
+    public function deletefromdb($where){
+        if (!$userID = $this->delete("teacher", $where)) {
+            throw new Exception(Utility\Text::get("USER_CREATE_EXCEPTION"));
+        }
+    
+    }
     
 }

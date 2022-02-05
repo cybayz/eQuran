@@ -69,4 +69,14 @@ class Teacher extends Core\Controller {
         ]);
     }
 
+    public function delete() {
+
+        // Check that the user is authenticated.
+        Utility\Auth::checkAuthenticated();
+
+        if (Model\Teacher::deleteteacher()) {
+            Utility\Redirect::to(APP_URL . "teacher/teacherlist");
+        }
+    }
+
 }

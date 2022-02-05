@@ -187,18 +187,18 @@ class Student extends Core\Model {
         return($this->getfromdb("batch",$where));
     }
 
-    public static function deletecourse() {
+    public static function deletestudent() {
 
         try {
-            $courseObj = new Course();
-            $courseID = $courseObj->deletefromdb([
+            $studentObj = new Student();
+            $studentID = $studentObj->deletefromdb([
                 0 => "id",
                 1 => "=",
                 2 => Utility\Input::post("deletionId")
             ]);
             //Utility\Flash::success(Utility\Text::get("COURSE_DELETED"));
-            Utility\Redirect::to(APP_URL . "course/courselist");
-            return $courseID;
+            Utility\Redirect::to(APP_URL . "student/studentlist");
+            return $studentID;
         } catch (Exception $ex) {
             Utility\Flash::danger($ex->getMessage());
             return false;
@@ -206,7 +206,7 @@ class Student extends Core\Model {
     }
 
     public function deletefromdb($where){
-        if (!$userID = $this->delete("course", $where)) {
+        if (!$userID = $this->delete("student", $where)) {
             throw new Exception(Utility\Text::get("USER_CREATE_EXCEPTION"));
         }
     

@@ -38,7 +38,7 @@
 <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="staticModalLabel" data-backdrop="static" aria-hidden="true" style="display: none;">
     <div class="modal-dialog modal-sm" role="document">
         <div class="modal-content">
-            <form action="<?= $this->makeURL("course/delete")?>" method="post" enctype="multipart/form-data">
+            <form action="<?= $this->makeURL("teacher/delete")?>" method="post" enctype="multipart/form-data">
                 <input type="hidden" name="csrf_token" value="<?php echo App\Utility\Token::generate(); ?>" />
                 <input type="hidden" name="deletionId" id="deletionId">
                 <div class="modal-header">
@@ -49,7 +49,7 @@
                 </div>
                 <div class="modal-body">
                     <p>
-                        Do you want to remove this course?
+                        Do you want to remove this teacher?
                     </p>
                 </div>
                 <div class="modal-footer">

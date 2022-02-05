@@ -104,4 +104,14 @@ class Student extends Core\Controller {
         }
     }
 
+    public function delete() {
+
+        // Check that the user is authenticated.
+        Utility\Auth::checkAuthenticated();
+
+        if (Model\Student::deletestudent()) {
+            Utility\Redirect::to(APP_URL . "student/studentlist");
+        }
+    }
+
 }
