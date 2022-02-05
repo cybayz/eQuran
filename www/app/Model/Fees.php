@@ -131,6 +131,43 @@ class Fees extends Core\Model {
         return($this->getfromdbusingselect($sql,$params));
     }
 
+    public static function getPendingStudentList(){
+        $feesObj = new Fees();
+        $filters = $_POST;
+        $data = $feesObj->getpendingstudents($filters);
+        return $data;
+    
+    }
+
+    public function getpendingstudents($filters){
+        $sql_condn = '';
+        if(isset($filters['month'])&& $filters['month']>0){
+            $sql_condn = " AND f.month  BETWEEN '".$filters['month']."-01' AND '".$filters['month']."-31' "." ";
+        }
+        $sql = "SELECT u.id, u.firstname, u.lastname, u.mobile, u.address, u.email, 
+                 u.juzz, u.createddate, c.coursename, b.batchname, u.courseid, u.batchid 
+                FROM user u  
+                LEFT JOIN course c ON c.id = u.courseid 
+                LEFT JOIN batch b ON b.id = u.batchid 
+                WHERE u.isadmin = 0 
+                AND u.id NOT IN 
+                (SELECT f.studentid FROM fees f WHERE amount>0 ".$sql_condn.")
+                 ";
+
+        $params = [];
+
+        if(isset($filters['course'])&& $filters['course']>0){
+            $sql = $sql." AND c.id = ".$filters['course']." ";
+        }
+        if(isset($filters['batch'])&& $filters['batch']>0){
+            $sql = $sql." AND b.id = ".$filters['batch']." ";
+        }
+        
+        $sql =$sql." GROUP BY u.id ";
+
+        return($this->getfromdbusingselect($sql,$params));
+    }
+
     public static function getPaymentList(){
         $feesObj = new Fees();
         $filters = $_POST;

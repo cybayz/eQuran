@@ -52,6 +52,23 @@ class Fees extends Core\Controller {
         ]);
     }
 
+    public function pendingstudents() {
+
+        Utility\Auth::checkAuthenticated();
+        $courses = Model\Course::getCourseList();
+        $batch_data = Model\Batch::getBatchList();
+
+        $studentdata = Model\Fees::getPendingStudentList();
+
+        $this->View->render("fees/pendingstudents", [
+            "title"             =>  "Pending Students",
+            "show_header"       =>  true,
+            "course_data"       =>  $courses->data(),
+            "batch_data"        =>  $batch_data->data(),
+            "student_data"      =>  $studentdata->data(),
+        ]);
+    }
+
     public function addpayment() {
 
         // Check that the user is authenticated.
