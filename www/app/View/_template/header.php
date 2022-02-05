@@ -105,15 +105,15 @@ use App\Utility\Flash;
                     <li class="menu-item-has-children dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-tasks"></i>Students</a>
                         <ul class="sub-menu children dropdown-menu">
-                            <li><i class="menu-icon fa fa-fort-awesome"></i><a href="font-fontawesome.html">Pending Students</a></li>
-                            <li><i class="menu-icon ti-themify-logo"></i><a href="font-themify.html">Paid Students</a></li>
+                            <li><i class="menu-icon ti-themify-logo"></i><a href="<?= $this->makeURL("fees/pendingstudents"); ?>">Pending Students</a></li>
+                            <li><i class="menu-icon ti-themify-logo"></i><a href="<?= $this->makeURL("fees/paidstudents"); ?>">Paid Students</a></li>
                         </ul>
                     </li>
                     <li class="menu-item-has-children dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-tasks"></i>Fees</a>
                         <ul class="sub-menu children dropdown-menu">
-                            <li><i class="menu-icon fa fa-fort-awesome"></i><a href="font-fontawesome.html">Add Payment</a></li>
-                            <li><i class="menu-icon ti-themify-logo"></i><a href="font-themify.html">Paid Students</a></li>
+                            <li><i class="menu-icon fa fa-fort-awesome"></i><a href="<?= $this->makeURL("fees/addpayment"); ?>">Add Payment</a></li>
+                            <li><i class="menu-icon fa fa-fort-awesome"></i><a href="<?= $this->makeURL("fees/paymentlist"); ?>">View Payments</a></li>
                         </ul>
                     </li>
                     <h3 class="menu-title">Extras</h3><!-- /.menu-title -->

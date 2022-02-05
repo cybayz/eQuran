@@ -1,7 +1,7 @@
 <div class="col-lg-12">
     <div class="card">
         <div class="card-header">
-            <strong>Add Mark</strong>
+            <strong>Add Payment</strong>
         </div>
         <div class="card-body card-block ">
             <form action="<?= $this->makeURL("mark/addmark") ?>" method="post" enctype="multipart/form-data" class="form-horizontal">
@@ -63,7 +63,6 @@
                         <th>Course Name</th>
                         <th>Batch Name</th>
                         <th>Current Juzz</th>
-                        <th>Previous Juzz Mark</th>
                         <th>Teacher</th>
                         <th>Action</th>
                     </tr>
@@ -79,13 +78,12 @@
                         <td><?=$this->course_data[$course_id_of_student]->coursename;?></td>
                         <td><?=$this->batch_data[$batch_id_of_student]->batchname;?></td>
                         <td><?=$row->juzz;?></td>
-                        <td><?=$row->mark;?></td>
                         <td><?= ($teacher_id_of_student<0)?"No Teacher":$this->teachers_data[$teacher_id_of_student]->name;?></td>
                         <td><button id="<?=$row->id;?>" data-id="<?=$row->id;?>" data-studentname="<?=$row->firstname;?> <?=$row->lastname;?>" type="button" 
-                            class="btn btn-danger btn-sm deletebtn" data-toggle="modal" data-target="#addmarkModal" 
+                            class="btn btn-danger btn-sm deletebtn" data-toggle="modal" data-target="#addpaymentModal" 
                             data-course="<?=$this->course_data[$course_id_of_student]->coursename;?>" data-batch = "<?=$this->batch_data[$batch_id_of_student]->batchname;?>" 
                             data-batchid = "<?=$batch_id_of_student;?>" data-courseid = "<?=$course_id_of_student;?>" 
-                            onclick="prefillid(this)">Add Mark</button></td>
+                            onclick="prefillid(this)">Add Payment</button></td>
                     </tr><?php                                 
                 }?>
                 </tbody>
@@ -93,16 +91,16 @@
         </div>
     </div>
 </div>
-<div class="modal fade" id="addmarkModal" tabindex="-1" role="dialog" aria-labelledby="staticModalLabel" data-backdrop="static" aria-hidden="true" style="display: none;">
+<div class="modal fade" id="addpaymentModal" tabindex="-1" role="dialog" aria-labelledby="staticModalLabel" data-backdrop="static" aria-hidden="true" style="display: none;">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
-            <form action="<?= $this->makeURL("mark/createmark")?>" method="post" enctype="multipart/form-data">
+            <form action="<?= $this->makeURL("fees/createpayment")?>" method="post" enctype="multipart/form-data">
                 <input type="hidden" name="csrf_token" value="<?php echo App\Utility\Token::generate(); ?>" />
                 <input type="hidden" name="studentid" id="studentid">
                 <input type="hidden" name="courseid" id="courseid">
                 <input type="hidden" name="batchid" id="batchid">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="staticModalLabel">Add Mark</h5>
+                    <h5 class="modal-title" id="staticModalLabel">Add Payment</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">×</span>
                     </button>
@@ -110,22 +108,15 @@
                 <div class="modal-body">
                     <div class="row form-group">
                     <div class="col col-md-1"></div>
-                    <div class="col col-md-3"><label for="select" class=" form-control-label">Select Juzz</label></div>
+                    <div class="col col-md-3"><label for="select" class=" form-control-label">Select Month</label></div>
                         <div class="col-12 col-md-3">
-                            <select name="juzz" id="juzz" class="form-control">
-                                <option value="0">Select Juzz</option>
-                                <option value="1">1/4 Juzz</option>
-                                <option value="2">1/2 Juzz</option>
-                                <?php for($i=3;$i<33;$i++){
-                                    echo ("<option value=".$i.">Juzz ".($i-2)."</option>");
-                                }?>
-                            </select>
+                            <input type="month" id="month" name="month" value="<?=date("Y-m");?>">
                         </div>
                     </div>
                     <div class="row form-group">
                         <div class="col col-md-1"></div>
-                        <div class="col col-md-3"><label for="text-input" class=" form-control-label">Mark</label></div>
-                        <div class="col-12 col-md-3"><input type="text" id="mark" name="mark" placeholder="Mark" class="form-control"></div>
+                        <div class="col col-md-3"><label for="text-input" class=" form-control-label">Amount</label></div>
+                        <div class="col-12 col-md-3"><input type="text" id="amount" name="amount" placeholder="Amount" class="form-control"></div>
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -162,5 +153,16 @@
         $('#studentid').val(id);
         $('#courseid').val(courseid);
         $('#batchid').val(batchid);
+        $.ajax({
+            url: "getstudentsmark",
+            type: "POST",
+            data: {
+                id: id
+            },
+            cache: false,
+            success: function(result){
+                $("#batch").html(result);
+            }
+        });
     };
 </script>
