@@ -127,11 +127,12 @@ class Student extends Core\Model {
     }
 
     public function getstudentdetailsbyid($studentId){
-        $sql = "SELECT u.id, u.firstname, u.lastname, u.mobile, u.address, 
+        $sql = "SELECT u.id, u.firstname, u.lastname, u.mobile, u.address, t.name as teachername, 
                 u.email, u.juzz, u.createddate, c.coursename, b.batchname, u.age, u.createddate 
                 FROM user u  
                 LEFT JOIN course c ON c.id = u.courseid 
                 LEFT JOIN batch b ON b.id = u.batchid 
+                LEFT JOIN teacher t ON t.id = u.teacherid 
                 WHERE u.id = :studentId";
         $params = [":studentId" => $studentId];
         return($this->getfromdbusingselect($sql,$params));
