@@ -110,10 +110,7 @@ class Model {
      * @throws Exception
      */
     protected function update($table, array $fields, $recordID = null) {
-        if (!$recordID and $this->exists()) {
-            $recordID = $this->data()->id;
-        }
-        return(!$this->Db->update($table, $recordID, $fields));
+        return($this->Db->update($table, $recordID, $fields));
     }
 
 }

@@ -90,6 +90,7 @@ use App\Utility\Flash;
                         <ul class="sub-menu children dropdown-menu">
                             <li><i class="menu-icon fa fa-th"></i><a href="<?= $this->makeURL("mark/marklist"); ?>">View Marks</a></li>
                             <li><i class="menu-icon fa fa-th"></i><a href="<?= $this->makeURL("mark/addmark"); ?>">Add Marks</a></li>
+                            <li><i class="menu-icon fa fa-th"></i><a href="<?= $this->makeURL("student/updatejuzz"); ?>">Update Juzz</a></li>
                         </ul>
                     </li>
                     <li class="menu-item-has-children dropdown">

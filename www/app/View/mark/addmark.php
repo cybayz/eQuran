@@ -78,7 +78,21 @@
                         <td><a href="<?=$this->makeURL("student/details/").$row->id; ?>"><?=$row->firstname;?> <?=$row->lastname;?></a></td>
                         <td><?=$this->course_data[$course_id_of_student]->coursename;?></td>
                         <td><?=$this->batch_data[$batch_id_of_student]->batchname;?></td>
-                        <td><?=$row->juzz;?></td>
+                        <?php
+                            switch($row->juzz){
+                                case 1:
+                                    $juzz="1/4";
+                                    break;
+                                case 2:
+                                    $juzz="1/2";
+                                    break;
+                                default:
+                                    $juzz=(($this->student_data[0]->juzz)-2);
+                                    break;
+                            }
+
+                        ?>
+                        <td><?=$juzz;?></td>
                         <td><?=$row->mark;?></td>
                         <td><?= ($teacher_id_of_student<0)?"No Teacher":$this->teachers_data[$teacher_id_of_student]->name;?></td>
                         <td><button id="<?=$row->id;?>" data-id="<?=$row->id;?>" data-studentname="<?=$row->firstname;?> <?=$row->lastname;?>" type="button" 

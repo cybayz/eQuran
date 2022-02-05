@@ -103,12 +103,12 @@
                                                             $juzz="1/2";
                                                             break;
                                                         default:
-                                                            $juzz=$this->student_data[0]->juzz;
+                                                            $juzz=(($this->student_data[0]->juzz)-2);
                                                             break;
                                                     }
 
                                                 ?>
-                                                <p class="form-control-static"><?= $juzz ?></p>
+                                                <p class="form-control-static"><?= ($juzz) ?></p>
                                             </div>
                                         </div>
                                         <div class="col-12 col-md-6">

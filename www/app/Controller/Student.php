@@ -45,6 +45,24 @@ class Student extends Core\Controller {
             "teachers_data" =>  $teachers->data()
         ]);
     }
+    
+    public function updatejuzz() {
+
+        // Check that the user is authenticated.
+        Utility\Auth::checkAuthenticated();
+
+        $course_data = Model\Course::getCourseList();
+        $batch_data = Model\Batch::getBatchList();
+        $student_data = Model\Student::getStudentList();
+        
+        $this->View->render("student/updatejuzz", [
+            "title" => "Update Juzz",
+            "batch_data" => $batch_data->data(),
+            "course_data" => $course_data->data(),
+            "student_data" => $student_data->data(),
+            "show_header" => true
+        ]);
+    }
 
     public function studentlist() {
 
@@ -101,6 +119,16 @@ class Student extends Core\Controller {
 
         if (Model\Student::add()) {
             Utility\Redirect::to(APP_URL . "student/studentlist");
+        }
+    }
+
+    public function updatestudentjuzz() {
+
+        // Check that the user is authenticated.
+        Utility\Auth::checkAuthenticated();
+
+        if (Model\Student::updatestudentjuzz()) {
+            Utility\Redirect::to(APP_URL . "student/updatejuzz");
         }
     }
 

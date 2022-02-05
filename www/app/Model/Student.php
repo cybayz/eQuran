@@ -64,6 +64,24 @@ class Student extends Core\Model {
         }
     }
 
+    public static function updatestudentjuzz() {
+
+        try {
+
+            $studentObj = new Student();
+            $id         = Utility\Input::post("studentid");
+            $studentID  = $studentObj->updateJuzz([
+                "juzz"  => Utility\Input::post("juzz")
+            ],$id);
+            //Utility\Flash::success(Utility\Text::get("REGISTER_USER_CREATED"));
+            Utility\Redirect::to(APP_URL . "student/updatejuzz"); 
+            return $studentID;
+        } catch (Exception $ex) {
+            Utility\Flash::danger($ex->getMessage());
+            return false;
+        }
+    }
+
 
     public function addStudent($fields){
         if (!$batchID = $this->create("user", $fields)) {
@@ -71,6 +89,13 @@ class Student extends Core\Model {
         }
         return $batchID;
     
+    }
+
+    public function updateJuzz($fields,$id){
+        if (!$this->update("user", $fields, $id)) {
+            throw new Exception(Utility\Text::get("USER_UPDATE_EXCEPTION"));
+        }  
+        return true; 
     }
     
     public static function getBatchList(){
