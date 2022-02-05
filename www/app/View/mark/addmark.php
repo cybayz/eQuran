@@ -117,7 +117,7 @@
                                 <option value="1">1/4 Juzz</option>
                                 <option value="2">1/2 Juzz</option>
                                 <?php for($i=3;$i<33;$i++){
-                                    echo ("<option value=".($i-2).">Juzz ".$i."</option>");
+                                    echo ("<option value=".$i.">Juzz ".($i-2)."</option>");
                                 }?>
                             </select>
                         </div>

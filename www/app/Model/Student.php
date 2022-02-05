@@ -91,6 +91,28 @@ class Student extends Core\Model {
         return $data;
     }
 
+    public static function getStudentMarkById($studentId){
+        $studentObj = new Student();
+        $data = $studentObj->getstudentmarkdetailsbyid($studentId);
+        return $data;
+    }
+
+    public static function getStudentAttendanceById($studentId){
+        $studentObj = new Student();
+        $filters = $_POST;
+        $month = '';
+        if(isset($filters['month'])&&$filters['month']>0){
+            $month= " AND a.date  BETWEEN '".$filters['month']."-01' AND '".$filters['month']."-31' "." ";
+        }
+        $data = $studentObj->getstudentattendancedetailsbyid($studentId, $month);
+        return $data;
+    }
+    public static function getTotalAbsent($studentId){
+        $studentObj = new Student();
+        $data = $studentObj->getTotalAbsentById($studentId);
+        return $data;
+    }
+
     public function getbatches(){
         return($this->getfromdb("batch"));
     }
@@ -105,11 +127,46 @@ class Student extends Core\Model {
     }
 
     public function getstudentdetailsbyid($studentId){
-        $sql = "SELECT u.id, u.firstname, u.lastname, u.mobile, u.address, u.email, u.juzz, u.createddate, c.coursename, b.batchname 
+        $sql = "SELECT u.id, u.firstname, u.lastname, u.mobile, u.address, 
+                u.email, u.juzz, u.createddate, c.coursename, b.batchname, u.age, u.createddate 
                 FROM user u  
                 LEFT JOIN course c ON c.id = u.courseid 
                 LEFT JOIN batch b ON b.id = u.batchid 
                 WHERE u.id = :studentId";
+        $params = [":studentId" => $studentId];
+        return($this->getfromdbusingselect($sql,$params));
+    }
+
+    public function getstudentmarkdetailsbyid($studentId){
+        $sql = "SELECT u.id, m.mark, m.juzz
+                FROM user u  
+                INNER JOIN mark m 
+                ON m.studentid=u.id 
+                WHERE u.id = :studentId 
+                ORDER BY m.juzz ";
+        $params = [":studentId" => $studentId];
+        return($this->getfromdbusingselect($sql,$params));
+    }
+
+    public function getstudentattendancedetailsbyid($studentId, $month){
+        $sql = "SELECT u.id, a.status, a.date, DAY(a.date) as dateday   
+                FROM user u  
+                INNER JOIN attendance a 
+                ON a.studentid=u.id 
+                WHERE u.id = :studentId ";
+                
+        $sql= $sql.$month;
+        $sql= $sql." ORDER BY a.date DESC ";
+        $params = [":studentId" => $studentId];
+        return($this->getfromdbusingselect($sql,$params));
+    }
+    
+    public function getTotalAbsentById($studentId){
+        $sql = "SELECT COUNT(id) AS totalabsent  
+                FROM attendance 
+                WHERE studentid= :studentId 
+                AND status=0 ";
+                
         $params = [":studentId" => $studentId];
         return($this->getfromdbusingselect($sql,$params));
     }

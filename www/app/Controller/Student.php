@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Core;
+use App\Core\Model as CoreModel;
 use App\Model;
 use App\Utility;
 use App\Utility\Response;
@@ -67,10 +68,20 @@ class Student extends Core\Controller {
         // Check that the user is authenticated.
         Utility\Auth::checkAuthenticated();
         $student_data = Model\Student::getStudentById($studentId);
+        $mark_data = Model\Student::getStudentMarkById($studentId);
+        $attendance_data = Model\Student::getStudentAttendanceById($studentId);
+        $total_absent = Model\Student::getTotalAbsent($studentId);
+        
+        $ismonthfiltered = isset($_POST['month'])?$_POST['month']:'';
+
         $this->View->render("student/studentdetail", [
-            "title" => "Student Detail",
-            "student_data" => $student_data->data(),
-            "show_header" => true
+            "title"             => "Student Detail",
+            "student_data"      => $student_data->data(),
+            "mark_data"         => $mark_data->data(),
+            "attendance_data"   => $attendance_data->data(),
+            "total_absent"      => $total_absent->data(),
+            "ismonthfiltered"   => $ismonthfiltered,
+            "show_header"       => true
         ]);
     }
 
