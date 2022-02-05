@@ -82,6 +82,7 @@
 
 
                                 <div class="tab-pane fade active show" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+                                    <label class=" form-control-label">Student progress :</label>
                                     <div class="progress mb-3">
                                         <div class="progress-bar bg-success" role="progressbar" style="width: <?=($this->student_data[0]->juzz/32*100);?>%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
                                     </div>
