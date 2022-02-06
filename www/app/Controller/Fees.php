@@ -97,6 +97,7 @@ class Fees extends Core\Controller {
         if (Model\Fees::add()) {
             Utility\Redirect::to(APP_URL . "fees/addpayment");
         }
+        return false;
     }
 
     public function getbatchbycourseid(){

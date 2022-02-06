@@ -5,6 +5,7 @@ namespace App\Model;
 use Exception;
 use App\Core;
 use App\Utility;
+use App\Utility\Redirect;
 
 /**
  * User Model:
@@ -35,12 +36,22 @@ class Fees extends Core\Model {
         }
         try {
             $feesObj = new Fees();
+            $transactionid = Utility\Input::post("transactionid");
+            $commontransaction = Utility\Input::post("commontransaction");
+            $tranactionIdexists = $feesObj->checkTransactionId($transactionid);
+            
+            if((!isset($commontransaction) || $commontransaction=='')&& (empty($tranactionIdexists) || $tranactionIdexists->data()->id>0)){
+                echo '<script>alert("This Transaction ID already exists!");window.location.href="'.APP_URL.'/fees/addpayment'.'";</script>';
+                return false;
+            }
             $feesID = $feesObj->addFees([
                 "studentid"     => Utility\Input::post("studentid"),
                 "courseid"      => Utility\Input::post("courseid"),
                 "batchid"       => Utility\Input::post("batchid"),
                 "amount"        => Utility\Input::post("amount"),
-                "month"         => Utility\Input::post("month")."-01"
+                "month"         => Utility\Input::post("month")."-01",
+                "transactionid" => Utility\Input::post("transactionid"),
+                "modeofpayment" => Utility\Input::post("modeofpayment")
             ]);
             Utility\Flash::success(Utility\Text::get("REGISTER_USER_CREATED"));
             Utility\Redirect::to(APP_URL . "fees/addpayment");
@@ -58,6 +69,12 @@ class Fees extends Core\Model {
         }
         return $feesID;
     
+    }
+
+    public function checkTransactionId($transactionid){
+
+        $field = "transactionid";
+        return($this->find("fees", [$field, "=", $transactionid]));
     }
     
     public static function getStudentList(){

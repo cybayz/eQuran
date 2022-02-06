@@ -118,6 +118,38 @@
                         <div class="col col-md-3"><label for="text-input" class=" form-control-label">Amount</label></div>
                         <div class="col-12 col-md-3"><input type="text" id="amount" name="amount" placeholder="Amount" class="form-control"></div>
                     </div>
+                    <div class="row form-group">
+                        <div class="col col-md-1"></div>
+                        <div class="col col-md-3"><label for="text-input" class=" form-control-label">Transaction Id</label></div>
+                        <div class="col-12 col-md-3"><input type="text" id="transactionid" name="transactionid" placeholder="Transaction Id" class="form-control"></div>
+                    </div>
+                    <div class="row form-group">
+                        <div class="col col-md-1"></div>
+                        <div class="col col-md-9">
+                            <div class="form-check">
+                                <div class="checkbox">
+                                    <label for="checkbox1" class="form-check-label ">
+                                        <input type="checkbox" id="commontransaction" name="commontransaction" value="commontransaction" class="form-check-input">Is Common Transaction Id
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                    <div class="col col-md-1"></div>
+                        <div class="col col-md-3"><label for="select" class=" form-control-label">Payment Mode</label></div>
+                        <div class="col-12 col-md-3">
+                            <select name="modeofpayment" id="modeofpayment" class="form-control">
+                                <option value="0">Not Applicable</option>
+                                <option value="Gpay">Gpay</option>
+                                <option value="PhonePe">PhonePe</option>
+                                <option value="Paytm">Paytm</option>
+                                <option value="BharathPe">BharathPe</option>
+                                <option value="IMPS">IMPS</option>
+                                <option value="BHIM">BHIM</option>
+                            </select>
+                        </div>
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
